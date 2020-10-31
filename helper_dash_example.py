@@ -50,7 +50,6 @@ purposes in the web application.
 # Relative paths respect to current file
 # DO NOT MODIFY: Relative path prefix to be able to find the dataset
 THIS_FILE_PATH = str(Path(__file__).parent.absolute())+"/"
-#FOLDER_PATH = THIS_FILE_PATH + "../../datasets/"
 FOLDER_PATH = THIS_FILE_PATH + "/"
 
 # Load original dataset file
@@ -66,10 +65,7 @@ training_data['ca'] = training_data['ca'].astype(float)
 
 # Structure to map df column names to meaningful labels
 colnames = sample_data.columns
-#colnames = colnames.drop('target').values
 colnames = colnames.drop('num').values
-#column_labels = ["Area", "Perimeter", "Compactness", "Length of Kernel",
-#                "Width of Kernel", "Asymmetry Coeff.", "Length Kernel Groove"]
 column_labels = ["Age", "Sex", "Chest Pain Type", "Resting Blood Pressure",
                 "Serum Cholesterol", "Fasting Blood Sugar", "Resting Electrocardiographic Results",
                 "Maximum Hart Rate Achieved", "Exercise Induced Angina", "ST depression induced by exercise reative to rest",
@@ -82,12 +78,6 @@ Structure of the HTML webpage using Dash library
 app_html_layout = html.Div([
 
     html.Center(html.H1("Intelli-Cardio - Heart Disease Predictor")),
-
-    #html.Div("This app classifies patient presence of Heart Disease from thirteem real-value attributes extracted from Electronic Health Records"),
-
-    #html.Div(['More information about dataset:',
-    #    html.A('https://archive.ics.uci.edu/ml/datasets/Heart+Disease')
-    #]),
 
     html.H3('Custom parameters'),
 
@@ -115,12 +105,6 @@ app_html_layout = html.Div([
                 ],
                 value=0
             ),
-            #html.Td( dcc.Slider(id='slider-sex',
-            #        min=0,
-            #        max=1,
-            #        step=1,
-            #        value=1,
-            #    ), style={'width':'55%'} ),
             html.Td( html.P(id='value-slider-sex',children=''), style={'width':'20%'} ),
             ]),
         # Chest Pain Type
@@ -136,12 +120,6 @@ app_html_layout = html.Div([
                 ],
                 value=1
             ),
-            #html.Td( dcc.Slider(id='slider-cp',
-            #        min=1,
-            #        max=4,
-            #        step=1,
-            #        value=4,
-            #    ), style={'width':'55%'} ),
             html.Td( html.P(id='value-slider-cp',children=''), style={'width':'20%'} ),
             ]),
         # Resting Blood Pressure trestbps
@@ -177,12 +155,6 @@ app_html_layout = html.Div([
                 ],
                 value=0
             ),
-            #html.Td( dcc.Slider(id='slider-fbs',
-            #        min=0,
-            #        max=1,
-            #        step=1,
-            #        value=1,
-            #    ), style={'width':'55%'} ),
             html.Td( html.P(id='value-slider-fbs',children=''), style={'width':'20%'} ),
             ]),
 
@@ -198,12 +170,6 @@ app_html_layout = html.Div([
                 ],
                 value=0
             ),
-            #html.Td( dcc.Slider(id='slider-restecg', #restecg
-            #        min=0,
-            #        max=2,
-            #        step=1,
-            #        value=2,
-            #    ), style={'width':'55%'} ),
             html.Td( html.P(id='value-slider-restecg',children=''), style={'width':'20%'} ),
             ]),
 
@@ -230,12 +196,6 @@ app_html_layout = html.Div([
                 ],
                 value=0
             ),
-            #html.Td( dcc.Slider(id='slider-exang',
-            #        min=0,
-            #        max=1,
-            #        step=1,
-            #        value=1,
-            #    ), style={'width':'55%'} ),
             html.Td( html.P(id='value-slider-exang',children=''), style={'width':'20%'} ),
             ]),
 
@@ -263,12 +223,6 @@ app_html_layout = html.Div([
                 ],
                 value=1
             ),
-            #html.Td( dcc.Slider(id='slider-slope',
-            #        min=1,
-            #        max=3,
-            #        step=1,
-            #        value=1,
-            #    ), style={'width':'55%'} ),
             html.Td( html.P(id='value-slider-slope',children=''), style={'width':'20%'} ),
             ]),
 
@@ -296,12 +250,6 @@ app_html_layout = html.Div([
                 ],
                 value=3
             ),
-            # html.Td( dcc.Slider(id='slider-thal',
-            #         min=3,
-            #         max=7,
-            #         step=1,
-            #         value=6,
-            #     ), style={'width':'55%'} ),
             html.Td( html.P(id='value-slider-thal',children=''), style={'width':'20%'} ),
             ]),
         ]),
@@ -311,7 +259,7 @@ app_html_layout = html.Div([
         html.Div([
             html.Br(),
             html.H4(html.B('Classification result', id='classification-result', style={'color':'#983e0f'})),
-            html.Button('Execute Classification', id='submit', style={'margin':'0 auto', 'width':'30%'}),
+            html.Button('Analyze', id='submit', style={'margin':'0 auto', 'width':'30%'}),
         ])
     ),
 
@@ -415,7 +363,7 @@ app_html_layout = html.Div([
         html.Div([
             html.Br(),
             html.H4(html.B('Classification result', id='classification-result-loaded', style={'color':'#983e0f'})),
-            html.Button('Execute Classification', id='submit-loaded', style={'margin':'0 auto', 'width':'30%'}),
+            html.Button('Analyze', id='submit-loaded', style={'margin':'0 auto', 'width':'30%'}),
         ])
     ),
 
